@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Adding Page</title>
+    <link th:href="@{/styles/style.css}" rel="stylesheet" />
+  </head>
+  <body class="background">
+    <div class="container">
+      <h2 class="prgrf">Add a new book :D</h2>
+      <form
+        action="#"
+        th:action="@{/books/add}"
+        th:object="${book}"
+        method="post"
+      >
+        <label for="title" class="prgrf">Title</label>
+        <input type="text" th:field="*{title}" id="title" placeholder="Title" />
+        <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span
+        ><br />
+        <label for="isbn" class="prgrf">Isbn</label>
+        <input type="number" th:field="*{isbn}" id="isbn" placeholder="Isbn" />
+        <span th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}"></span
+        ><br />
+
+        <label for="publishedYear" class="prgrf">PublishedYear: </label>
+        <input
+          type="number"
+          th:field="*{publishedYear}"
+          id="publishedYear"
+          placeholder="publishedYear"
+        />
+        <span
+          th:if="${#fields.hasErrors('publishedYear')}"
+          th:errors="*{publishedYear}"
+        ></span
+        ><br />
+
+        <label for="lang" class="prgrf">language: </label>
+        <input type="text" th:field="*{lang}" id="lang" placeholder="lang" />
+        <span th:if="${#fields.hasErrors('lang')}" th:errors="*{lang}"></span
+        ><br />
+
+        <input class="fnl" type="submit" value="Add Books" />
+      </form>
+    </div>
+  </body>
+</html>

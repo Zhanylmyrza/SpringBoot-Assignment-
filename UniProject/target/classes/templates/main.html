@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+      integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+      crossorigin="anonymous"
+    />
+
+    <title>Main Page</title>
+    <link th:href="@{/styles/style.css}" rel="stylesheet" />
+  </head>
+  <body class="background">
+    <div class="container" th:switch="${books}">
+      <h2 th:case="null">No book yet!</h2>
+      <div th:case="*">
+        <h2 class="prgrf">Bookshelf</h2>
+        <table>
+          <thead>
+            <tr>
+              <th class="prgrf pdng">Title</th>
+              <th class="prgrf pdng">Isbn</th>
+              <th class="prgrf pdng">Published</th>
+              <th class="prgrf pdng">Language</th>
+
+              <th class="prgrf">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="book : ${books}">
+              <td th:text="${book.title}"></td>
+              <td th:text="${book.isbn}"></td>
+              <td th:text="${book.publishedYear}"></td>
+
+              <td th:text="${book.lang}"></td>
+
+              <td>
+                <a th:href="@{/books/edit/{id}(id=${book.id})}"
+                  ><i class="fas fa-user-edit ml-2"></i
+                ></a>
+                <!-- <i class="fa-solid fa-pencil">  why when I used pencil it isn't working? -->
+              </td>
+              <td>
+                <a th:href="@{/books/delete/{id}(id=${book.id})}"
+                  ><i class="fas fa-user-times ml-2"></i
+                ></a>
+                <!-- <i class="fa-solid fa-trash-can-xmark"> same for this, why?-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        <a class="fnl" href="/books/addBook">Add New Book</a>
+      </p>
+    </div>
+  </body>
+</html>
